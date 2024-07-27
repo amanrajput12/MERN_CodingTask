@@ -1,5 +1,6 @@
 import { Transcation } from "../Models/TransactionSchema.js";
-let response;
+import axios from "axios"
+
 export const GetSaleData = async function(req,res){
     try {
         const {month} = req.query
@@ -85,6 +86,72 @@ else if(value.price >=901){
         message:"Data get sucessfully",
         data:data
       })
+    } catch (error) {
+        console.log("error on getting data",error.message);
+    }
+}
+
+export const PichartData = async function(req,res){
+    try {
+       const {month} = req.query 
+       let data = []
+       console.log("month",month);
+       const response = await Transcation.find()
+       const resp =  response?.filter((data)=>new Date(data.dateOfSale).getMonth()==month)
+       console.log("filter",resp);
+       resp.map((transaction)=>{
+        console.log(transaction.category,data);
+        const existingCategory = data.find(item => item.category === transaction.category);
+        console.log("check",existingCategory);
+
+        if (existingCategory) {
+          
+            existingCategory.value += transaction.price;
+        }
+        else {
+        data.push({
+            category: transaction.category,
+            value: transaction.price 
+        });
+    }
+       })
+       
+       if(data){
+        res.status(200).json({
+            sucess:true,
+            message:"Data get sucessfully",
+            response:data
+        })
+       }
+    } catch (error) {
+        console.log("error on getting data",error.message);
+    }
+}
+export const combineData = async function(req,res){
+    try {
+        const {month} = req.query
+        const barcharturl = `http://localhost:4000/v1/data/barchart?month=${month}`;
+        const picharturl =`http://localhost:4000/v1/data/pichart?month=${month}`;
+        const saleDataurl = `http://localhost:4000/v1/data/sale?month=${month}`;
+
+        
+        const pichartResponse = await axios.get(picharturl)
+        const barrchartResponse = await axios.get(barcharturl)
+        const saleDataResponse = await axios.get(saleDataurl)
+        //  console.log("on combine",pichartResponse.data);
+        const combineResponse = { 
+            pichart:pichartResponse.data,
+            barchart:barrchartResponse.data,
+            saleData:saleDataResponse.data
+        }
+        console.log("combine data are ",combineResponse);
+        if(combineResponse){
+             res.status(200).json({
+                sucess:true,
+                message:"Get data sucess",
+                data:combineResponse
+             }) 
+        }
     } catch (error) {
         console.log("error on getting data",error.message);
     }
