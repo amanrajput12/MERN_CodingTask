@@ -18,7 +18,6 @@ saleStatistics(0)
         
       }) 
       const resp =  await data.json()
-      console.log("sale data are",resp);
 setdata(resp.data)
 setloading("hidden")
     }

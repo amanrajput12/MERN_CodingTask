@@ -25,7 +25,7 @@ function App() {
       method:"GET"
     })
     const value = await data.json()
-    console.log("data ", value)
+   
     setTable(value.data)
     setLoading("hidden")
   }
@@ -35,13 +35,9 @@ function App() {
 let currentItem = Table.slice(indexStart,indexlast)
 
  async function MonthTransaction(value) {
- 
   setCurrentPage(1)
- 
-  console.log("value",value);
   if(value == "Select Months"){
      getData()
-     console.log("select nothing");
      return 
   }
   else {
@@ -53,7 +49,7 @@ let currentItem = Table.slice(indexStart,indexlast)
       }
      })
      const  resp = await data.json() 
-     console.log("on month data",resp);
+   
      setTable(resp.data)
      setLoading("hidden")
   }
@@ -70,7 +66,7 @@ let currentItem = Table.slice(indexStart,indexlast)
   if (interval) {
     clearTimeout(interval);
   }
-  console.log(value);
+ 
   setLoading("flex")
    interval = setTimeout(async() => {
     const data = await fetch(`https://mern-codingtask.onrender.com/v1/data/query?query=${value}`,{
@@ -84,7 +80,6 @@ let currentItem = Table.slice(indexStart,indexlast)
     if(resp){
       setLoading("hidden")
     }
-    console.log("on interval",resp);
   }, 1000);
  
  }
@@ -108,10 +103,6 @@ let currentItem = Table.slice(indexStart,indexlast)
         <option value="9">October</option>
         <option value="10">November</option>
         <option value="11">December</option>
-        
-
-
-        
       </select>
     </div>
     <table className='border-collapse w-full'>

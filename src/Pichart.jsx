@@ -18,7 +18,6 @@ const Pichart = () => {
             }
         })
         const data = await resp.json()
-        console.log("data are of pi chart",data);
         const categories = data.response.map((item) => item.category)
         const values = data.response.map((item) => item.value)
         setData(values)
@@ -29,7 +28,6 @@ const Pichart = () => {
     useEffect(()=>{
         getdata(0)
        },[])
-    console.log("set dagta",data,label);
   return (
     <div className='flex flex-col items-center' >
          <ReactLoading  className={`${loading} h-[100px] m-auto `}   /> 

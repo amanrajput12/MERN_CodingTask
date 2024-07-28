@@ -17,15 +17,12 @@ const Combine = () => {
         try {
             setloading("flex")
              const response = await axios.get(`https://mern-codingtask.onrender.com/v1/data/combinedata?month=${month}`)
-             console.log("data of combine fetch",response.data.data);
              if(response.data.data){
                 setStatisticsData(response.data.data.saleData.data)
                 setBarchartData(response.data.data.barchart.data)
              const pichart = response.data.data.pichart.response
-             console.log("for pi chart",pichart);
                 const categories = pichart.map((item) => item.category)
                 const values = pichart.map((item) => item.value)
-                console.log("filter pi chart",categories,values);
                 setPiChartData(values)
                 setPiChartLabel(categories)
                 setloading("hidden")
