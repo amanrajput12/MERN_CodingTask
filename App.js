@@ -8,7 +8,7 @@ dotenv.config();
 const port = process.env.PORT || 4000
 connectDb()
 app.use(cors({
-    origin: 'http://localhost:5173/',
+    origin: 'https://merncodingtask.vercel.app/',
     credentials: true
   }));
 app.use(express.json());
