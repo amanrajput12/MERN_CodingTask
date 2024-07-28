@@ -3,13 +3,11 @@ import Chart from 'react-apexcharts'
 import ReactLoading from 'react-loading';
 
 const Barchart = () => {
-    const [data,setData]= useState(null)
+    const [data,setData]= useState([])
     const [monthvalue,setmonthvalue]= useState(0)
     const [loading,setloading]= useState("none")
     const month =["January","February","March","April","May","June","July","August","September","October","November","December"]
-    useEffect(()=>{
-      getdata(0)
-    },[])
+
     async function getdata(value){
         setloading("flex")
         const data = await fetch(`http://localhost:4000/v1/data/barchart?month=${value}`,{
@@ -22,6 +20,9 @@ const Barchart = () => {
          setData(resp.data)
          setloading("none")
     }
+    useEffect(()=>{
+      getdata(0)
+    },[])
   return (
     <div>
         <div>

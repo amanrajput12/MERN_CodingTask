@@ -4,12 +4,18 @@ import ReactLoading from 'react-loading';
 import Statistics from './Statistics.jsx';
 import Barchart from './Barchart.jsx';
 import Pichart from './Pichart.jsx';
+import Combine from './Combine.jsx';
+
 function App() {
   const [Table, setTable] = useState([])
   const [currentPage,setCurrentPage] = useState(1)
   const [loading,setLoading] = useState("none")
+ 
+
+  // const hooksale =  UseGetSaleData(1)
   useEffect(() => {
-    
+ 
+ 
     getData()
   }, [])
 
@@ -153,6 +159,8 @@ let currentItem = Table.slice(indexStart,indexlast)
       <Statistics/>
       <Barchart/>
       <Pichart/>
+      
+    <Combine/>
     </>
   )
 }
