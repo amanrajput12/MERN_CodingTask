@@ -21,7 +21,7 @@ function App() {
 
   async function getData() {
     setLoading("flex")
-    const data = await fetch("http://localhost:4000/v1/data/get",{
+    const data = await fetch("https://mern-codingtask.onrender.com/v1/data/get",{
       method:"GET"
     })
     const value = await data.json()
@@ -92,7 +92,7 @@ let currentItem = Table.slice(indexStart,indexlast)
   return (
     <>
        <ReactLoading style={{display:`${loading}`,height:"100px", justifyContent:"center" }} type="balls" color={"#ffffff"}   />
-    <div style={{display:"flex", justifyContent:"space-between"}}>
+    <div style={{display:"flex", justifyContent:"space-between",padding:"10px",height:"40px"}}>
       <input onChange={(e)=>handleQuery(e.target.value)} type="search"  placeholder='Search transaction'  />
       <select onChange={(e)=>MonthTransaction(e.target.value)} name="months" id="months">
         <option value="Select Months">Select Months</option>

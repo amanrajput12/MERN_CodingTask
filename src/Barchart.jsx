@@ -10,7 +10,7 @@ const Barchart = () => {
 
     async function getdata(value){
         setloading("flex")
-        const data = await fetch(`http://localhost:4000/v1/data/barchart?month=${value}`,{
+        const data = await fetch(`https://mern-codingtask.onrender.com/v1/data/barchart?month=${value}`,{
             method:"GET",
             headers:{
                 'Content-Type': 'application/json'

@@ -16,7 +16,7 @@ const Combine = () => {
     async function getresponse(month){
         try {
             setloading("flex")
-             const response = await axios.get(`http://localhost:4000/v1/data/combinedata?month=${month}`)
+             const response = await axios.get(`https://mern-codingtask.onrender.com/v1/data/combinedata?month=${month}`)
              console.log("data of combine fetch",response.data.data);
              if(response.data.data){
                 setStatisticsData(response.data.data.saleData.data)
@@ -38,7 +38,7 @@ const Combine = () => {
     <div>
       <ReactLoading style={{display:`${loading}`,height:"100px", justifyContent:"center" }} type="balls" color={"#ffffff"}   /> 
           {/* heder */}
-          <div>
+          <div style={{display:"flex" ,justifyContent:"center" ,padding:"10px",gap:"20px"}}>
             <h2>Combine</h2>
             <select onChange={(e)=>{
             getresponse(e.target.value)
