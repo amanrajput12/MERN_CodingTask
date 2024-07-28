@@ -21,8 +21,9 @@ function App() {
 
   async function getData() {
     setLoading("flex")
-    const data = await fetch("https://mern-codingtask.onrender.com/v1/data/get",{
-      method:"GET"
+    const data = await fetch("/v1/data/get",{
+      method:"GET",
+       credentials: 'include'
     })
     const value = await data.json()
     console.log("data ", value)
@@ -46,11 +47,12 @@ let currentItem = Table.slice(indexStart,indexlast)
   }
   else {
     setLoading("flex")
-    const data = await fetch(`http://localhost:4000/v1/data/getMonth?value=${value}`,{
+    const data = await fetch(`/v1/data/getMonth?value=${value}`,{
       method:"GET",
       headers:{
         'Content-Type': 'application/json'
-      }
+      },
+       credentials: 'include'
      })
      const  resp = await data.json() 
      console.log("on month data",resp);
@@ -73,7 +75,7 @@ let currentItem = Table.slice(indexStart,indexlast)
   console.log(value);
   setLoading("flex")
    interval = setTimeout(async() => {
-    const data = await fetch(`http://localhost:4000/v1/data/query?query=${value}`,{
+    const data = await fetch(`/v1/data/query?query=${value}`,{
       method:"GET",
       headers:{
         'Content-Type': 'application/json'

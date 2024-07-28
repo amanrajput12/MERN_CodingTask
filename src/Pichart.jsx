@@ -11,7 +11,7 @@ const Pichart = () => {
    
     async function getdata(month){
        setloading("flex")
-        const resp = await fetch(`https://mern-codingtask.onrender.com/v1/data/pichart?month=${month}`,{
+        const resp = await fetch(`/v1/data/pichart?month=${month}`,{
             method:"GET",
             headers:{
                 'Content-Type': 'application/json'

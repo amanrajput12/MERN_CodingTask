@@ -10,7 +10,7 @@ saleStatistics(0)
     },[])
     async function saleStatistics(value){
         setloading("flex")
-      const data = await fetch(`https://mern-codingtask.onrender.com/v1/data/sale?month=${value}`,{
+      const data = await fetch(`/v1/data/sale?month=${value}`,{
         method:"GET",
         headers:{
         "Content-Type":"application/json"
