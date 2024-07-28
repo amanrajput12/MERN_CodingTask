@@ -73,7 +73,7 @@ let currentItem = Table.slice(indexStart,indexlast)
   console.log(value);
   setLoading("flex")
    interval = setTimeout(async() => {
-    const data = await fetch(`/v1/data/query?query=${value}`,{
+    const data = await fetch(`https://mern-codingtask.onrender.com/v1/data/query?query=${value}`,{
       method:"GET",
       headers:{
         'Content-Type': 'application/json'
