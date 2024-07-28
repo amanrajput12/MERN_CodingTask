@@ -27,7 +27,7 @@ function App() {
     const value = await data.json()
     console.log("data ", value)
     setTable(value.data)
-    setLoading("none")
+    setLoading("hidden")
   }
   const itemperpage = 10
   const indexlast = currentPage * itemperpage
