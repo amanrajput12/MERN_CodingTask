@@ -23,7 +23,7 @@ const Pichart = () => {
         const values = data.response.map((item) => item.value)
         setData(values)
         setLabel(categories)
-        setloading("none")
+        setloading("hidden")
     }
 
     useEffect(()=>{
@@ -31,11 +31,11 @@ const Pichart = () => {
        },[])
     console.log("set dagta",data,label);
   return (
-    <div >
-         <ReactLoading style={{display:`${loading}`,height:"100px", justifyContent:"center" }} type="balls" color={"#ffffff"}   /> 
-        <div style={{display:"flex" ,justifyContent:"center",gap:"20px"}}>
+    <div className='flex flex-col items-center' >
+         <ReactLoading  className={`${loading} h-[100px] m-auto `}   /> 
+        <div className='flex justify-center items-center m-2 gap-11'>
       <h2>Pi chart</h2>
-      <select onChange={(e)=>{
+      <select  className='text-gray-900 w-1/3 h-10 lg:w-1/2'  onChange={(e)=>{
         getdata(e.target.value)
         setmonthvalue(e.target.value)
         }}  name="months" id="months">
@@ -59,16 +59,15 @@ const Pichart = () => {
      </select>
       
       </div>
-      <Chart
+      <Chart  className="w-[90vw]  lg:w-[50vw] h-auto"
       type="pie"
-      width={1300}    
-      height={600}
+      
     
 series={data}
       options={{
         title:{
             text:`Pi chart stats - ${month[monthvalue]}`,
-            style: { color: "#f20001", fontSize: 30 },
+            style: { color: "#f20001", fontSize: 18 },
         },
         noData:{text:"Empty Data"},
      labels:label

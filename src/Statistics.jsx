@@ -20,14 +20,14 @@ saleStatistics(0)
       const resp =  await data.json()
       console.log("sale data are",resp);
 setdata(resp.data)
-setloading("none")
+setloading("hidden")
     }
   return (
-    <div>
-        <ReactLoading style={{display:`${loading}`,height:"100px", justifyContent:"center" }} type="balls" color={"#ffffff"}   /> 
-      <div style={{display:"flex",gap:"100px", justifyContent:"center"}}>
+    <div >
+        <ReactLoading   className={`${loading} h-[100px] m-auto `}   /> 
+      <div  className='flex h-14 justify-around p-3 lg:h-16'>
         <h2>Statistcs - {month[monthvalue]}</h2>
-        <select onChange={(e)=>{
+        <select className='text-gray-900 w-1/3 lg:w-1/6'  onChange={(e)=>{
             saleStatistics(e.target.value)
             setmonthvalue(e.target.value)
         }
@@ -51,19 +51,19 @@ setloading("none")
         
       </select>
       </div>
-      <div style={{display:"flex", justifyContent:"center"}}>
-        <table style={{borderCollapse:"collapse" ,border:'1px solid white',padding:'10px'}}>
+      <div className='flex justify-center'>
+        <table  className='border-collapse w-full m-5 lg:w-1/2 lg:mx-auto'>
             <tr>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>Total Sale</td>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>{data?.totalsale}</td>
+                <td  className='border-solid border-2 p-2 w-1/4 '>Total Sale</td>
+                <td className='border-solid border-2 p-2 w-1/4'>{data?.totalsale}</td>
             </tr>
             <tr>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>Total Sold Item</td>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>{data?.totalSoldItem}</td>
+                <td className='border-solid border-2 p-2 w-1/4 '>Total Sold Item</td>
+                <td className='border-solid border-2 p-2 w-1/4 '>{data?.totalSoldItem}</td>
             </tr>
             <tr>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>Total Not Sold Item</td>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>{data?.totalNotSoldItme}</td>
+                <td className='border-solid border-2 p-2 w-1/4 '>Total Not Sold Item</td>
+                <td className='border-solid border-2 p-2 w-1/4 '>{data?.totalNotSoldItme}</td>
             </tr>
         </table>
       </div>

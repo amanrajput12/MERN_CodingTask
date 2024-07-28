@@ -28,7 +28,7 @@ const Combine = () => {
                 console.log("filter pi chart",categories,values);
                 setPiChartData(values)
                 setPiChartLabel(categories)
-                setloading("none")
+                setloading("hidden")
              }
         } catch (error) {
             console.log("error on geeting data",error.message);
@@ -36,11 +36,11 @@ const Combine = () => {
     }
   return (
     <div>
-      <ReactLoading style={{display:`${loading}`,height:"100px", justifyContent:"center" }} type="balls" color={"#ffffff"}   /> 
+      <ReactLoading  className={`${loading} h-[100px] m-auto `}  /> 
           {/* heder */}
-          <div style={{display:"flex" ,justifyContent:"center" ,padding:"10px",gap:"20px"}}>
-            <h2>Combine</h2>
-            <select onChange={(e)=>{
+          <div className='flex items-center justify-center m-2 p-4 gap-10 h-16'>
+            <h2>Combine Response In one</h2>
+            <select className='text-gray-900 w-1/3 h-10 lg:w-1/6' onChange={(e)=>{
             getresponse(e.target.value)
             setmonthvalue(e.target.value)
         }
@@ -62,22 +62,22 @@ const Combine = () => {
           </div>
 
           {/* chart */}
-          <div style={{display:"flex",justifyContent:"space-around"}}>
-          <table style={{borderCollapse:"collapse" ,border:'1px solid white',padding:'10px'}}>
+          <div  className='flex flex-col lg:flex-row justify-around items-center w-screen'>
+          <table  className='border-collapse  m-5 lg:w-1/4 lg:mx-auto' >
             <tr>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>Total Sale</td>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>{statisticsData?.totalsale}</td>
+                <td  className='border-solid border-2 p-2 w-1/2 '>Total Sale</td>
+                <td  className='border-solid border-2 p-2 w-1/4 '>{statisticsData?.totalsale}</td>
             </tr>
             <tr>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>Total Sold Item</td>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>{statisticsData?.totalSoldItem}</td>
+                <td  className='border-solid border-2 p-2 w-1/4 '>Total Sold Item</td>
+                <td  className='border-solid border-2 p-2 w-1/4 '>{statisticsData?.totalSoldItem}</td>
             </tr>
             <tr>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>Total Not Sold Item</td>
-                <td style={{border:"1px solid white",padding:"20px",width:"100px"}}>{statisticsData?.totalNotSoldItme}</td>
+                <td  className='border-solid border-2 p-2 w-1/4 '>Total Not Sold Item</td>
+                <td  className='border-solid border-2 p-2 w-1/4 '>{statisticsData?.totalNotSoldItme}</td>
             </tr>
         </table>
-        <Chart type='bar'  width={600} height={400} 
+        <Chart type='bar' height={400}  className=" w-[90vw]  lg:w-1/3 "   
        series ={ [{
         name: 'series-1',
         data: barchartData
@@ -103,19 +103,17 @@ const Combine = () => {
       />
       {/* pi chart */}
 
-      <Chart 
-      type="pie"
-      width={600}    
-      height={400}
+      <Chart   className="w-[100vw] lg:w-1/3"
+      type="pie" 
     
 series={pichartData}
       options={{
         title:{
             text:`Pi chart stats - ${month[monthvalue]}`,
-            style: { color: "#f20001", fontSize: 30 },
+            style: { color: "#f20001", fontSize: 2 },
         },
         noData:{text:"Empty Data"},
-     labels:[pichartlabel]
+     labels:pichartlabel
       }}
       />
           </div>

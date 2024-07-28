@@ -18,7 +18,7 @@ const Barchart = () => {
         })
         const  resp = await data.json()
          setData(resp.data)
-         setloading("none")
+         setloading("hidden")
     }
     useEffect(()=>{
       getdata(0)
@@ -26,11 +26,11 @@ const Barchart = () => {
   return (
     <div>
         <div>
-        <ReactLoading style={{display:`${loading}`,height:"100px", justifyContent:"center" }} type="balls" color={"#ffffff"}   /> 
+        <ReactLoading  className={`${loading} h-[100px] m-auto `}  /> 
         </div>
-        <div style={{display:"flex" , justifyContent:"center" , marginTop:"20px" ,gap:"20px"}}>
+        <div  className='flex justify-center items-center p-3 m-3 gap-12 '>
       <h3>Bar chart</h3>
-      <select onChange={(e)=>{
+      <select className='text-gray-900 w-1/3 h-10 lg:w-1/6' onChange={(e)=>{
         getdata(e.target.value)
         setmonthvalue(e.target.value)
         }}  name="months" id="months">
@@ -54,9 +54,9 @@ const Barchart = () => {
      </select>
       </div>
       
-      <Chart type='bar'  width={1380} height={700} 
+      <Chart type='bar' height={600}  className="w-[90vw] h-auto" 
        series ={ [{
-        name: 'series-1',
+        name: 'barchart',
         data: data
       }] }
       options={
@@ -64,15 +64,14 @@ const Barchart = () => {
       
             title: {
                 text: `BarChar stats - ${month[monthvalue]}`,
-                style: { fontSize: 20 },
+                style: { fontSize: 17 },
               },
           
               xaxis: {
-                tickPlacement: "on",
                 categories: ["0-100","101-200","201-300","301-400","401-500","501-600","601-700","701-800","801-900","901-Above"],
                 title: {
                   text: "Transactions",
-                  style: { color: "#f20001", fontSize: 30 },
+                  style: { color: "#f22000", fontSize: 20 },
                 },
               },
         }

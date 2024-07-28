@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './App.css'
+
 import ReactLoading from 'react-loading';
 import Statistics from './Statistics.jsx';
 import Barchart from './Barchart.jsx';
@@ -55,7 +55,7 @@ let currentItem = Table.slice(indexStart,indexlast)
      const  resp = await data.json() 
      console.log("on month data",resp);
      setTable(resp.data)
-     setLoading("none")
+     setLoading("hidden")
   }
  }
  let interval 
@@ -82,7 +82,7 @@ let currentItem = Table.slice(indexStart,indexlast)
     const resp = await data.json()
     setTable(resp.data)
     if(resp){
-      setLoading("none")
+      setLoading("hidden")
     }
     console.log("on interval",resp);
   }, 1000);
@@ -90,11 +90,11 @@ let currentItem = Table.slice(indexStart,indexlast)
  }
 
   return (
-    <>
-       <ReactLoading style={{display:`${loading}`,height:"100px", justifyContent:"center" }} type="balls" color={"#ffffff"}   />
-    <div style={{display:"flex", justifyContent:"space-between",padding:"10px",height:"40px"}}>
-      <input onChange={(e)=>handleQuery(e.target.value)} type="search"  placeholder='Search transaction'  />
-      <select onChange={(e)=>MonthTransaction(e.target.value)} name="months" id="months">
+    <div className='bg-[#262625] text-white font-semibold font-sans w-screen'>
+       <ReactLoading  className={`${loading} h-[100px] m-auto `}  />
+    <div className='flex h-14 justify-around p-3 lg:h-16'>
+      <input className='text-black w-1/2 lg:w-1/6 p-2 rounded-md' onChange={(e)=>handleQuery(e.target.value)} type="search"  placeholder='Search transaction'  />
+      <select className='text-gray-900 w-1/3 lg:w-1/6' onChange={(e)=>MonthTransaction(e.target.value)} name="months" id="months">
         <option value="Select Months">Select Months</option>
         <option value="0">Janurary</option>
         <option value="1">Faburary</option>
@@ -114,54 +114,57 @@ let currentItem = Table.slice(indexStart,indexlast)
         
       </select>
     </div>
-      <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-        <thead style={{position:"sticky" , top:"0px" , opacity:"0.9", backgroundColor:"burlywood"}}>
-          <tr>
-            <th style={{ border: '1px solid black', padding: '8px', width: '50px' }}>ID</th>
-            <th style={{ border: '1px solid black', padding: '8px', width: '200px' }}>Title</th>
-            <th style={{ border: '1px solid black', padding: '8px', width: '300px' }}>Description</th>
-            <th style={{ border: '1px solid black', padding: '8px', width: '100px' }}>Price</th>
-            <th style={{ border: '1px solid black', padding: '8px', width: '150px' }}>Category</th>
-            <th style={{ border: '1px solid black', padding: '8px', width: '100px' }}>Sold</th>
-            <th style={{ border: '1px solid black', padding: '8px', width: '150px' }}>Image</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Table && currentItem.map((data) => (
-            <tr key={data._id}>
-              <td style={{ border: '1px solid black', padding: '8px', width: '50px' }}>{data._id}</td>
-              <td style={{ border: '1px solid black', padding: '8px', width: '200px' }}>{data.title}</td>
-              <td style={{ border: '1px solid black', padding: '8px', width: '300px' }}>{data.description}</td>
-              <td style={{ border: '1px solid black', padding: '8px', width: '100px' }}>{data.price}</td>
-              <td style={{ border: '1px solid black', padding: '8px', width: '150px' }}>{data.category}</td>
-              <td style={{ border: '1px solid black', padding: '8px', width: '100px' }}>{String(data.sold)}</td>
-              <td style={{ border: '1px solid black', padding: '8px', width: '150px' }}><img width="100px" src={data.image} alt="image" /></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div style={{display:"flex" , alignItems:"center" , justifyContent:"space-between"}}>
+    <table className='border-collapse w-full'>
+  <thead className='sticky top-0 bg-stone-600'>
+    <tr>
+      <th className='border-solid border-2 p-2 w-1/12'>ID</th>
+      <th className='border-solid border-2 p-2 w-2/12'>Title</th>
+      <th className='border-solid hidden lg:table-cell border-2 p-2 w-2/12'>Description</th>
+      <th className='border-solid border-2 p-2 w-2/12'>Price</th>
+      <th className='border-solid border-2 p-2 w-2/12'>Category</th>
+      <th className='border-solid border-2 p-2 w-1/12'>Sold</th>
+      <th className='border-solid hidden lg:table-cell border-2 p-2 w-2/12'>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Table && currentItem.map((data) => (
+      <tr key={data._id}>
+        <td className='border-solid border-2 p-2 w-1/12'>{data._id}</td>
+        <td className='border-solid border-2 p-2 w-2/12'>{data.title}</td>
+        <td className='border-solid border-2 hidden lg:table-cell p-2 w-2/12'>{data.description}</td>
+        <td className='border-solid border-2 p-2 w-2/12'>{data.price}</td>
+        <td className='border-solid border-2 p-2 w-2/12'>{data.category}</td>
+        <td className='border-solid border-2 p-2 w-1/12'>{String(data.sold)}</td>
+        <td className='border-solid hidden lg:table-cell border-2 p-2 w-2/12'>
+          <img className='w-full h-auto' src={data.image} alt="image" />
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+       <div className='flex items-center justify-around p-5' >
         <h4>Page No: {currentPage}</h4>
         <h4>
-          <button onClick={()=>{
+          <button className='bg-cyan-800 p-2 rounded-md hover:bg-slate-800  m-2' onClick={()=>{
             if(currentPage>=1 && indexlast<=Table.length-1){
               setCurrentPage(currentPage+1)
             }
           }}>Next</button>
-          <button onClick={()=>{
+          <button className='bg-cyan-800 p-2 rounded-md hover:bg-slate-800  m-2' onClick={()=>{
            if(currentPage>1){
            setCurrentPage(currentPage-1)
            }
           }} >Prev</button>
         </h4>
         <h4>Per page: {itemperpage}</h4>
-      </div>
+      </div> 
       <Statistics/>
       <Barchart/>
       <Pichart/>
       
     <Combine/>
-    </>
+    </div>
   )
 }
 
