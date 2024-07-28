@@ -16,7 +16,7 @@ const Combine = () => {
     async function getresponse(month){
         try {
             setloading("flex")
-             const response = await axios.get(`/v1/data/combinedata?month=${month}`)
+             const response = await axios.get(`https://mern-codingtask.onrender.com/v1/data/combinedata?month=${month}`)
              console.log("data of combine fetch",response.data.data);
              if(response.data.data){
                 setStatisticsData(response.data.data.saleData.data)
